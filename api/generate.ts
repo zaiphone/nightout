@@ -2,7 +2,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
-const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
+const model = genAI.getGenerativeModel(
+  { model: 'gemini-1.5-flash' },
+  { apiVersion: 'v1' }
+)
 
 function buildPrompt(form: any): string {
   return `You are a night-out planner. Given a group's details, return a JSON plan with 3 drinking game options and a post-game activity with real venue suggestions.
